@@ -41,6 +41,23 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0C0C0C}
 @keyframes shim{0%{left:-100%}60%,100%{left:160%}}
 @keyframes pdot{0%,100%{box-shadow:0 0 0 0 rgba(80,227,194,.5)}50%{box-shadow:0 0 0 10px rgba(80,227,194,0)}}
 @keyframes arrowB{0%,100%{transform:translateX(0)}50%{transform:translateX(8px)}}
+/* Slide transitions */
+@keyframes slideInR{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideInL{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideOutL{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(-60px)}}
+@keyframes slideOutR{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(60px)}}
+.slide.tx-in-r{animation:slideInR .45s cubic-bezier(.22,1,.36,1) forwards}
+.slide.tx-in-l{animation:slideInL .45s cubic-bezier(.22,1,.36,1) forwards}
+.slide.tx-out-l{animation:slideOutL .4s ease forwards;pointer-events:none!important}
+.slide.tx-out-r{animation:slideOutR .4s ease forwards;pointer-events:none!important}
+/* Partnership badge enhancements */
+@keyframes lineGrow{from{width:0}to{width:100%}}
+@keyframes xPulseGlow{0%,100%{color:var(--border);text-shadow:none}50%{color:var(--orange);text-shadow:0 0 30px rgba(245,130,31,.7),0 0 60px rgba(245,130,31,.3)}}
+@keyframes xPulseRing{0%{transform:scale(1);opacity:.7;box-shadow:0 0 0 0 rgba(245,130,31,.5)}100%{transform:scale(1.6);opacity:0;box-shadow:0 0 0 20px rgba(245,130,31,0)}}
+@keyframes tagFadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+/* Typewriter cursor */
+@keyframes twBlink{0%,100%{opacity:1}50%{opacity:0}}
+.tw-cur{display:inline-block;width:5px;height:.82em;background:var(--orange);vertical-align:middle;margin-left:4px;animation:twBlink .85s step-end infinite}
 
 /* ── S1 HERO ── */
 #s1{background:radial-gradient(ellipse 90% 70% at 50% 0%,rgba(245,130,31,.14) 0%,transparent 65%),#0C0C0C;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px}
@@ -187,21 +204,44 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0C0C0C}
 
 <!-- S1 HERO -->
 <div class="slide" id="s1">
-  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:0;text-align:center;padding:80px;">
-    <div class="anim" data-d="0"><span class="label" style="font-size:15px;letter-spacing:6px;margin-bottom:34px;display:block;">EKSKLUSIVT FOR FREMTIND-ANSATTE</span></div>
-    <div class="anim" data-d="150">
-      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;font-size:128px;line-height:1.03;letter-spacing:-2px;text-transform:uppercase;">
-        <span style="display:block;color:var(--white);">DIN PERSONLIGE COACH.</span>
-        <span style="display:block;color:var(--orange);">I DIN ARBEIDSHVERDAG.</span>
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:0;text-align:center;padding:80px 120px;">
+
+    <!-- Partnership badge — hero element -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:20px;margin-bottom:44px;">
+      <!-- Top line -->
+      <div id="s1line1" style="height:1px;background:linear-gradient(90deg,transparent,var(--orange),transparent);width:0;transition:width .9s .2s ease;"></div>
+
+      <!-- Partners row -->
+      <div style="display:flex;align-items:center;gap:40px;">
+        <span class="s1p fl" id="s1pl" style="font-size:56px;">FREMTIND</span>
+
+        <!-- × with pulse ring -->
+        <div style="position:relative;display:flex;align-items:center;justify-content:center;width:72px;height:72px;">
+          <div id="s1ring" style="position:absolute;inset:-12px;border:1.5px solid var(--orange);border-radius:50%;opacity:0;transform:scale(.4);transition:none;"></div>
+          <span class="s1x" id="s1x" style="font-size:52px;position:relative;z-index:1;">×</span>
+        </div>
+
+        <span class="s1p fr" id="s1pr" style="font-size:56px;"><span style="color:#CACACA;">JOB</span><span style="color:var(--orange);">FIT</span></span>
       </div>
+
+      <!-- Tag line -->
+      <div id="s1tag" style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:4px;color:var(--grey);text-transform:uppercase;opacity:0;transform:translateY(8px);transition:all .5s ease;"></div>
+
+      <!-- Bottom line -->
+      <div id="s1line2" style="height:1px;background:linear-gradient(90deg,transparent,var(--orange),transparent);width:0;transition:width .9s .2s ease;"></div>
     </div>
-    <div id="s1div" style="width:0;height:2px;background:linear-gradient(90deg,transparent,var(--orange),transparent);transition:width 1s .3s ease;margin:28px auto;"></div>
-    <div class="anim" data-d="350"><p class="body" style="max-width:920px;">JobFit gir deg fast personlig coach, individuelt treningsprogram og digital oppfølging — med 40% rabatt som Fremtind-ansatt.</p></div>
-    <div class="s1-partners anim" data-d="550">
-      <span class="s1p fl" id="s1pl">FREMTIND</span>
-      <span class="s1x" id="s1x">×</span>
-      <span class="s1p fr" id="s1pr"><span style="color:#CACACA;">JOB</span><span style="color:var(--orange);">FIT</span></span>
+
+    <!-- Main headline -->
+    <div id="s1hl" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;font-size:118px;line-height:1.03;letter-spacing:-2px;text-transform:uppercase;opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;">
+      <span style="display:block;color:var(--white);">DIN PERSONLIGE COACH.</span>
+      <span style="display:block;color:var(--orange);">I DIN ARBEIDSHVERDAG.</span>
     </div>
+
+    <!-- Body -->
+    <div id="s1body" style="opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;margin-top:28px;">
+      <p class="body" style="max-width:900px;">JobFit gir deg fast personlig coach, individuelt treningsprogram og digital oppfølging — med 40% rabatt som Fremtind-ansatt.</p>
+    </div>
+
   </div>
   <div class="s1-hint">BLAS → PILTAST ELLER KLIKK</div>
   <div class="chrome"><div class="slide-num">01 / 06</div><div class="lmark"><span class="j">JOB</span><span class="f">FIT</span></div><span></span></div>
@@ -210,11 +250,11 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0C0C0C}
 <!-- S2 PORTAL -->
 <div class="slide" id="s2">
   <div class="s2l">
-    <span class="label anim" data-d="0">02 — Om samarbeidet</span>
-    <div class="h2 anim" data-d="100">SKREDDERSYDD<br>TRENING FOR<br><span class="o">FREMTIND.</span></div>
-    <div class="oline anim" data-d="200"></div>
-    <p class="body anim" data-d="300">JobFit matcher deg med din personlige coach og gir deg et individuelt treningsprogram. Alt gjennomføres i Fremtinds egne treningsfasiliteter.</p>
-    <ul class="s2-arrowlist anim" data-d="420">
+    <span class="label anim-l" data-d="0">02 — Om samarbeidet</span>
+    <div class="h2" id="s2tw" style="min-height:230px;"><span class="tw-cur"></span></div>
+    <div class="oline" id="s2line" style="width:0;transition:width .6s ease;"></div>
+    <p class="body anim-l" data-d="0" id="s2body">JobFit matcher deg med din personlige coach og gir deg et individuelt treningsprogram. Alt gjennomføres i Fremtinds egne treningsfasiliteter.</p>
+    <ul class="s2-arrowlist" id="s2list" style="opacity:0;transform:translateX(-20px);transition:all .5s ease;" data-d="0">
       <li><span class="arr">→</span><span><strong style="color:var(--white);">Fast personlig coach</strong> — samme coach gjennom hele perioden</span></li>
       <li><span class="arr">→</span><span><strong style="color:var(--white);">40% rabatt</strong> — eksklusivt for alle Fremtind-ansatte</span></li>
     </ul>
@@ -382,27 +422,130 @@ window.addEventListener('resize',scaleStage);scaleStage();
 
 const TOTAL=6;let cur=1;
 function showSlide(n){
-  document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.slide').forEach(s=>{s.classList.remove('active','tx-in-r','tx-in-l','tx-out-l','tx-out-r');});
   const sl=document.getElementById('s'+n);sl.classList.add('active');
   document.getElementById('prog').style.width=(n/TOTAL*100)+'%';
   document.getElementById('btnP').classList.toggle('hidden',n===1);
   document.getElementById('btnN').classList.toggle('hidden',n===TOTAL);
+  // Reset anim classes then re-trigger
+  sl.querySelectorAll('.anim,.anim-l,.anim-r,.anim-s').forEach(el=>el.classList.remove('in'));
   setTimeout(()=>{sl.querySelectorAll('.anim,.anim-l,.anim-r,.anim-s').forEach(el=>{const d=parseInt(el.dataset.d)||0;setTimeout(()=>el.classList.add('in'),d);});},60);
   if(n===1)aS1();if(n===2)aS2();if(n===3)aS3();if(n===4)aS4();if(n===5)aS5();if(n===6)aS6();
 }
-function go(d){const nx=Math.max(1,Math.min(TOTAL,cur+d));if(nx===cur)return;cur=nx;showSlide(cur);}
+/* ── SLIDE TRANSITIONS ── */
+let transitioning = false;
+function go(d){
+  if(transitioning) return;
+  const nx=Math.max(1,Math.min(TOTAL,cur+d));
+  if(nx===cur) return;
+  transitioning = true;
+
+  const prev = document.getElementById('s'+cur);
+  const next = document.getElementById('s'+nx);
+  const fwd  = d > 0;
+
+  // Prepare next slide (visible but off-screen via anim class)
+  next.classList.add('active');
+  next.classList.add(fwd ? 'tx-in-r' : 'tx-in-l');
+
+  // Animate out current
+  prev.classList.add(fwd ? 'tx-out-l' : 'tx-out-r');
+
+  setTimeout(()=>{
+    prev.classList.remove('active','tx-out-l','tx-out-r');
+    next.classList.remove('tx-in-r','tx-in-l');
+    transitioning = false;
+    cur = nx;
+    document.getElementById('prog').style.width=(cur/TOTAL*100)+'%';
+    document.getElementById('btnP').classList.toggle('hidden',cur===1);
+    document.getElementById('btnN').classList.toggle('hidden',cur===TOTAL);
+    // Run anim elements
+    setTimeout(()=>{next.querySelectorAll('.anim,.anim-l,.anim-r,.anim-s').forEach(el=>{const dd=parseInt(el.dataset.d)||0;setTimeout(()=>el.classList.add('in'),dd);});},40);
+    if(cur===1)aS1();if(cur===2)aS2();if(cur===3)aS3();if(cur===4)aS4();if(cur===5)aS5();if(cur===6)aS6();
+  }, 460);
+}
+
 document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ')go(1);if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(-1);});
 let tx=0;document.addEventListener('touchstart',e=>tx=e.touches[0].clientX);document.addEventListener('touchend',e=>{const dx=tx-e.changedTouches[0].clientX;if(Math.abs(dx)>50)go(dx>0?1:-1);});
 
+/* ── S1: PARTNERSHIP BADGE ANIM ── */
 function aS1(){
-  const div=document.getElementById('s1div'),pl=document.getElementById('s1pl'),pr=document.getElementById('s1pr'),px=document.getElementById('s1x');
-  [pl,pr,px].forEach(el=>{el.classList.remove('in');el.style.opacity='0';});
-  div.style.width='0';
-  setTimeout(()=>div.style.width='480px',500);
-  setTimeout(()=>{pl.classList.add('in');pr.classList.add('in');},850);
-  setTimeout(()=>px.classList.add('in'),1200);
+  const pl=document.getElementById('s1pl'), pr=document.getElementById('s1pr');
+  const px=document.getElementById('s1x'), ring=document.getElementById('s1ring');
+  const tag=document.getElementById('s1tag');
+  const l1=document.getElementById('s1line1'), l2=document.getElementById('s1line2');
+  const hl=document.getElementById('s1hl'), body=document.getElementById('s1body');
+
+  // Reset
+  [pl,pr].forEach(el=>{el.classList.remove('in');el.style.opacity='0';});
+  px.classList.remove('in'); px.style.opacity='0';
+  ring.style.opacity='0'; ring.style.transform='scale(.4)';
+  tag.style.opacity='0'; tag.style.transform='translateY(8px)'; tag.textContent='';
+  l1.style.width='0'; l2.style.width='0';
+  hl.style.opacity='0'; hl.style.transform='translateY(24px)';
+  body.style.opacity='0'; body.style.transform='translateY(16px)';
+
+  // Sequence
+  setTimeout(()=>{l1.style.width='420px'; l2.style.width='420px';}, 200);
+  setTimeout(()=>{pl.classList.add('in'); pr.classList.add('in');}, 600);
+  setTimeout(()=>{px.classList.add('in');}, 1000);
+  setTimeout(()=>{
+    ring.style.transition='opacity .4s ease, transform .6s cubic-bezier(.34,1.56,.64,1)';
+    ring.style.opacity='1'; ring.style.transform='scale(1)';
+    setTimeout(()=>{ ring.style.animation='xPulseRing 2.4s ease-out infinite'; }, 600);
+  }, 1100);
+  setTimeout(()=>{
+    tag.textContent='NYTT SAMARBEID · 2026';
+    tag.style.opacity='1'; tag.style.transform='translateY(0)';
+  }, 1300);
+  setTimeout(()=>{hl.style.opacity='1'; hl.style.transform='translateY(0)';}, 1500);
+  setTimeout(()=>{body.style.opacity='1'; body.style.transform='translateY(0)';}, 1800);
 }
-function aS2(){['pr1','pr2','pr3','pr4','pr5'].forEach((id,i)=>{const el=document.getElementById(id);if(el){el.classList.remove('in');setTimeout(()=>el.classList.add('in'),300+i*140);}});}
+function aS2(){
+  // Reset portal rows
+  ['pr1','pr2','pr3','pr4','pr5'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('in');});
+  // Reset typewriter target
+  const tw=document.getElementById('s2tw');
+  const line=document.getElementById('s2line');
+  const body=document.getElementById('s2body');
+  const list=document.getElementById('s2list');
+  if(tw) tw.innerHTML='<span class="tw-cur"></span>';
+  if(line) line.style.width='0';
+  if(body){body.style.opacity='0';body.style.transform='translateX(-20px)';}
+  if(list){list.style.opacity='0';list.style.transform='translateX(-20px)';}
+
+  // Typewriter: "SKREDDERSYDD\nTRENING FOR\nFREMTIND."
+  // Line 1 white, line 2 white, line 3 orange
+  const L1='SKREDDERSYDD', L2='TRENING FOR', L3='FREMTIND.';
+  const full = L1 + '|' + L2 + '|' + L3; // | = line break marker
+  let i=0;
+  const speed=52;
+
+  function tick(){
+    if(!tw) return;
+    i++;
+    // Build display
+    let typed='', seg=0, ci=0;
+    for(let c=0;c<Math.min(i,full.length);c++){
+      if(full[c]==='|'){seg++;ci=0;typed+='<br>';} else {ci++;
+        const isL3=seg===2;
+        typed+='<span style="color:'+(isL3?'var(--orange)':'var(--white)')+'">'+full[c]+'</span>';
+      }
+    }
+    tw.innerHTML=typed+(i<full.length?'<span class="tw-cur"></span>':'');
+
+    if(i<full.length){ setTimeout(tick,speed); }
+    else {
+      // After typing done, reveal rest
+      setTimeout(()=>{if(line)line.style.width='56px';},200);
+      setTimeout(()=>{if(body){body.style.transition='all .5s ease';body.style.opacity='1';body.style.transform='translateX(0)';}},400);
+      setTimeout(()=>{if(list){list.style.transition='all .5s ease .1s';list.style.opacity='1';list.style.transform='translateX(0)';}},600);
+      // Portal rows
+      ['pr1','pr2','pr3','pr4','pr5'].forEach((id,idx)=>{const el=document.getElementById(id);if(el)setTimeout(()=>el.classList.add('in'),700+idx*130);});
+    }
+  }
+  setTimeout(tick, 200);
+}
 function aS3(){
   [['b1','p1','fl1','sv1','dv1','ft1','nt1',350],['b2','p2','fl2','sv2','dv2','ft2','nt2',500],['b3','p3','fl3','sv3','dv3','ft3','nt3',650]].forEach(([b,p,fl,sv,dv,ft,nt,d])=>{
     setTimeout(()=>document.getElementById(b)?.classList.add('show'),d);
