@@ -11,7 +11,7 @@ html{scroll-behavior:smooth}
 html,body{width:100%;height:100%;overflow-x:hidden;overflow-y:scroll;scroll-snap-type:y mandatory;background:#0C0C0C}
 .deck-viewport{background:#0C0C0C}
 .deck-stage{position:relative;width:1920px;transform-origin:0 0}
-.slide{scroll-snap-align:start;position:relative;width:1920px;height:1080px;overflow:hidden;display:block;visibility:visible;opacity:1;pointer-events:auto;background:#0C0C0C;font-family:'Barlow',sans-serif;-webkit-font-smoothing:antialiased}
+.slide{scroll-snap-align:start;position:relative;width:1920px;height:var(--slide-h,1080px);overflow:hidden;display:block;visibility:visible;opacity:1;pointer-events:auto;background:#0C0C0C;font-family:'Barlow',sans-serif;-webkit-font-smoothing:antialiased}
 .slide.active{z-index:1}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.2s!important}}
 :root{--orange:#F5821F;--orange-d:#C4611A;--black:#0C0C0C;--surf:#141414;--surf2:#1C1C1C;--border:#2A2A2A;--white:#FFFFFF;--grey:#888;--greyl:#AAAAAA;--green:#50e3c2}
@@ -803,7 +803,11 @@ const COACHES = [
 /* ── STAGE ZOOM SCALING ── */
 function scaleStage(){
   const sc = window.innerWidth / 1920;
-  document.getElementById('stage').style.zoom = sc;
+  const stage = document.getElementById('stage');
+  stage.style.zoom = sc;
+  // Make each slide exactly one viewport tall (no gaps)
+  const vh = Math.round(window.innerHeight / sc);
+  stage.style.setProperty('--slide-h', vh + 'px');
 }
 window.addEventListener('resize', scaleStage);
 scaleStage();
