@@ -59,6 +59,31 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0C0C0C}
 .prow{cursor:pointer}
 .prow:hover{background:rgba(245,130,31,.12)!important;border-color:rgba(245,130,31,.5)!important;transform:translateX(4px);transition:all .2s ease!important}
 .prow:hover .prow-text{color:var(--white)!important}
+/* ── SPOTLIGHT CARD ── */
+.spotlight{
+  position:absolute;inset:0;pointer-events:none;z-index:0;border-radius:inherit;
+  background:radial-gradient(600px circle at var(--mx,50%) var(--my,50%),
+    rgba(245,130,31,0.13) 0%,
+    rgba(245,130,31,0.06) 30%,
+    transparent 65%);
+  opacity:0;transition:opacity .35s ease;
+}
+.pcard:hover .spotlight{opacity:1}
+/* Make sure card children sit above spotlight */
+.pcard>*:not(.spotlight):not(.select-badge){position:relative;z-index:1}
+
+/* ── QUOTE ROTATOR (slide 1) ── */
+.qr-wrap{position:relative;text-align:center;min-height:90px;}
+.qr-q{
+  font-size:24px;color:var(--greyl);line-height:1.65;max-width:860px;margin:0 auto;
+  position:absolute;width:100%;left:0;
+  opacity:0;transform:translateY(12px);
+  transition:opacity .55s ease,transform .55s ease;
+}
+.qr-q.active{opacity:1;transform:translateY(0);position:relative;}
+.qr-dots{display:flex;gap:10px;justify-content:center;margin-top:20px;}
+.qr-d{width:24px;height:3px;border-radius:2px;background:var(--border);cursor:pointer;transition:all .3s ease;}
+.qr-d.active{background:var(--orange);width:36px;}
 /* Price card selection */
 .pcard.selected{border-color:var(--orange)!important;box-shadow:0 0 40px rgba(245,130,31,.2)!important;transform:translateY(-8px)!important}
 .pcard.selected::before{height:4px!important}
@@ -279,9 +304,20 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0C0C0C}
       <span style="display:block;color:var(--orange);">I DIN ARBEIDSHVERDAG.</span>
     </div>
 
-    <!-- Body -->
-    <div id="s1body" style="opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;margin-top:28px;">
-      <p class="body" style="max-width:900px;">JobFit gir deg fast personlig coach, individuelt treningsprogram og digital oppfølging — med 40% rabatt som Fremtind-ansatt.</p>
+    <!-- Quote rotator body -->
+    <div id="s1body" style="opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;margin-top:28px;width:100%;">
+      <div class="qr-wrap" id="s1qr">
+        <div class="qr-q active" data-qi="0">JobFit gir deg fast personlig coach, individuelt treningsprogram og digital oppfølging — med <strong style="color:var(--white);">40% rabatt</strong> som Fremtind-ansatt.</div>
+        <div class="qr-q" data-qi="1">Gjennomfør treningsøktene dine i Fremtinds egne fasiliteter — med en coach som <strong style="color:var(--white);">kjenner deg og dine mål.</strong></div>
+        <div class="qr-q" data-qi="2">Samme coach. Hvert besøk. Din personlige fremgang — <strong style="color:var(--white);">dokumentert og målbar over tid.</strong></div>
+        <div class="qr-q" data-qi="3"><strong style="color:var(--white);">Tre pakker. Én metode.</strong> Personlig oppfølging som faktisk gir resultater i hverdagen.</div>
+      </div>
+      <div class="qr-dots" id="s1dots">
+        <div class="qr-d active" onclick="goQuote1(0)"></div>
+        <div class="qr-d" onclick="goQuote1(1)"></div>
+        <div class="qr-d" onclick="goQuote1(2)"></div>
+        <div class="qr-d" onclick="goQuote1(3)"></div>
+      </div>
     </div>
 
   </div>
@@ -331,6 +367,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0C0C0C}
     </div>
     <div class="s3cards">
       <div class="pcard anim-s" data-d="150">
+        <div class="spotlight"></div>
+        <div class="select-badge">✓ DETTE PASSER FOR DEG</div>
         <div class="pc-top"><div class="pc-sess">4 ØKTER / MND</div><div class="pc-badge" id="b1">40% RABATT</div></div>
         <div class="pc-orig">Veiledende: kr 6.990,-</div>
         <div class="pc-price" id="p1">4.190<span class="suf">,-</span></div>
@@ -341,6 +379,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0C0C0C}
         <div class="pc-note" id="nt1">Perfekt startpunkt. Bygger vane og kontinuitet over tid.</div>
       </div>
       <div class="pcard feat anim-s" data-d="280">
+        <div class="spotlight"></div>
+        <div class="select-badge">✓ DETTE PASSER FOR DEG</div>
         <div class="pc-top"><div class="pc-sess">6 ØKTER / MND</div><div class="pc-badge" id="b2">40% RABATT</div></div>
         <div class="pc-orig">Veiledende: kr 8.990,-</div>
         <div class="pc-price" id="p2">5.390<span class="suf">,-</span></div>
@@ -351,6 +391,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0C0C0C}
         <div class="pc-note" id="nt2">Mest populær — god balanse mellom frekvens og fleksibilitet.</div>
       </div>
       <div class="pcard anim-s" data-d="410">
+        <div class="spotlight"></div>
+        <div class="select-badge">✓ DETTE PASSER FOR DEG</div>
         <div class="pc-top"><div class="pc-sess">8 ØKTER / MND</div><div class="pc-badge" id="b3">40% RABATT</div></div>
         <div class="pc-orig">Veiledende: kr 11.990,-</div>
         <div class="pc-price" id="p3">7.190<span class="suf">,-</span></div>
@@ -575,7 +617,7 @@ function aS1(){
   }, 1050);
   setTimeout(()=>{ tag.textContent='NYTT SAMARBEID · 2026'; tag.style.opacity='1'; tag.style.transform='translateY(0)'; }, 1250);
   setTimeout(()=>{ hl.style.opacity='1'; hl.style.transform='translateY(0)'; }, 1450);
-  setTimeout(()=>{ body.style.opacity='1'; body.style.transform='translateY(0)'; }, 1750);
+  setTimeout(()=>{ body.style.opacity='1'; body.style.transform='translateY(0)'; startQuoteRotator(); }, 1750);
 }
 function aS2(){
   // Reset portal rows
@@ -765,6 +807,46 @@ function aS5(){
 function aS6(){['ob1','ob2','ob3'].forEach((id,i)=>{const el=document.getElementById(id);el.style.opacity='0';el.style.transform='translateY(22px)';setTimeout(()=>{el.style.transition='all .5s ease';el.style.opacity='1';el.style.transform='translateY(0)';},200+i*250);});}
 
 showSlide(1);
+
+/* ── SPOTLIGHT: mouse tracking on price cards ── */
+function initSpotlight(){
+  document.querySelectorAll('.pcard').forEach(card=>{
+    card.addEventListener('mousemove', e=>{
+      const rect = card.getBoundingClientRect();
+      // Divide by stage scale to convert screen px → card-local px
+      const sc = rect.width / card.offsetWidth;
+      card.style.setProperty('--mx', ((e.clientX - rect.left) / sc) + 'px');
+      card.style.setProperty('--my', ((e.clientY - rect.top)  / sc) + 'px');
+    });
+    card.addEventListener('mouseleave', ()=>{
+      // Reset to center so glow fades gracefully from center
+      card.style.setProperty('--mx', '50%');
+      card.style.setProperty('--my', '50%');
+    });
+  });
+}
+window.addEventListener('DOMContentLoaded', initSpotlight);
+
+/* ── QUOTE ROTATOR: slide 1 ── */
+let qrIdx1 = 0, qrTimer1 = null;
+function goQuote1(i){
+  clearTimeout(qrTimer1);
+  const quotes = document.querySelectorAll('#s1qr .qr-q');
+  const dots   = document.querySelectorAll('#s1dots .qr-d');
+  quotes[qrIdx1].classList.remove('active');
+  dots[qrIdx1].classList.remove('active');
+  qrIdx1 = i;
+  quotes[qrIdx1].classList.add('active');
+  dots[qrIdx1].classList.add('active');
+  qrTimer1 = setTimeout(()=>goQuote1((qrIdx1+1)%quotes.length), 4500);
+}
+function startQuoteRotator(){
+  qrIdx1 = 0;
+  document.querySelectorAll('#s1qr .qr-q').forEach((q,i)=>q.classList.toggle('active',i===0));
+  document.querySelectorAll('#s1dots .qr-d').forEach((d,i)=>d.classList.toggle('active',i===0));
+  clearTimeout(qrTimer1);
+  qrTimer1 = setTimeout(()=>goQuote1(1), 4500);
+}
 </script>
 </body>
 </html>
