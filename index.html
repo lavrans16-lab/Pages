@@ -351,18 +351,24 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0C0C0C}
 /* ── CTA BAND (redesigned, high-impact) ── */
 .cta-band{
   position:relative;overflow:hidden;border-radius:20px;
-  background:linear-gradient(120deg,#1A1008 0%,#1C1410 55%,#160E06 100%);
-  border:1.5px solid var(--orange-d);
+  background:linear-gradient(120deg,#15110C 0%,#161412 55%,#120E0A 100%);
+  border:1.5px solid var(--border);
   padding:44px 56px;display:flex;align-items:center;justify-content:space-between;gap:40px;
-  transition:box-shadow .5s ease,border-color .5s ease;
+  transition:box-shadow .5s ease,border-color .5s ease,background .5s ease;
 }
-.cta-band.lit{border-color:var(--orange);box-shadow:0 0 60px rgba(245,130,31,.25),inset 0 0 40px rgba(245,130,31,.06)}
-/* animated glow sweep across band */
+/* Dormant by default — only wakes when the traveling current reaches it (step 4) */
+.cta-band.lit{
+  border-color:var(--orange);
+  background:linear-gradient(120deg,#1A1008 0%,#1C1410 55%,#160E06 100%);
+  box-shadow:0 0 60px rgba(245,130,31,.25),inset 0 0 40px rgba(245,130,31,.06);
+}
+/* animated glow sweep — only when lit */
 .cta-band::before{
   content:'';position:absolute;top:-50%;left:-30%;width:50%;height:200%;
   background:radial-gradient(ellipse,rgba(245,130,31,.18) 0%,transparent 70%);
-  animation:ctaSweep 5s ease-in-out infinite;
+  opacity:0;transition:opacity .5s ease;
 }
+.cta-band.lit::before{opacity:1;animation:ctaSweep 5s ease-in-out infinite}
 @keyframes ctaSweep{0%,100%{left:-30%}50%{left:110%}}
 .cta-band>*{position:relative;z-index:1}
 .cta-left{display:flex;flex-direction:column;gap:12px}
@@ -370,10 +376,12 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0C0C0C}
 .cta-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;font-size:64px;line-height:.95;text-transform:uppercase;letter-spacing:-1px;color:var(--white)}
 .cta-title .o{color:var(--orange)}
 .cta-right{display:flex;flex-direction:column;align-items:flex-end;gap:18px;flex-shrink:0}
-.shim-btn{position:relative;background:var(--orange);color:#000;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:28px;text-transform:uppercase;letter-spacing:4px;padding:24px 60px;border:none;border-radius:10px;cursor:pointer;overflow:hidden;transition:transform .2s,box-shadow .3s;box-shadow:0 0 0 0 rgba(245,130,31,.5);animation:ctaPulse 2.2s ease-in-out infinite}
+.shim-btn{position:relative;background:var(--orange);color:#000;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:28px;text-transform:uppercase;letter-spacing:4px;padding:24px 60px;border:none;border-radius:10px;cursor:pointer;overflow:hidden;transition:transform .2s,box-shadow .3s,filter .5s ease;box-shadow:0 0 0 0 rgba(245,130,31,.5);filter:saturate(.7) brightness(.92)}
 @keyframes ctaPulse{0%,100%{box-shadow:0 0 30px 0 rgba(245,130,31,.4)}50%{box-shadow:0 0 50px 8px rgba(245,130,31,.65)}}
-.shim-btn::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);animation:shim 2.4s ease-in-out infinite}
-.shim-btn:hover{transform:scale(1.04)}
+/* Button only glows + shimmers once the current arrives */
+.cta-band.lit .shim-btn{animation:ctaPulse 2.2s ease-in-out infinite;filter:none}
+.cta-band.lit .shim-btn::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);animation:shim 2.4s ease-in-out infinite}
+.shim-btn:hover{transform:scale(1.04);filter:none}
 .cta-contact{display:flex;flex-direction:column;align-items:flex-end;gap:3px;font-family:'Space Mono',monospace;font-size:13px;letter-spacing:1.5px;color:var(--greyl);text-transform:uppercase}
 .cta-contact .em{color:var(--orange)}
 .cta-sub{font-family:'Space Mono',monospace;font-size:13px;letter-spacing:2px;color:var(--grey);text-transform:uppercase;line-height:1.9}
