@@ -11,7 +11,8 @@ html{scroll-behavior:smooth}
 html,body{width:100%;height:auto;overflow-x:hidden;overflow-y:auto;background:#0C0C0C}
 .deck-viewport{background:#0C0C0C}
 .deck-stage{position:relative;width:1920px;transform-origin:0 0}
-.slide{position:relative;width:1920px;height:1080px;overflow:hidden;display:block;visibility:visible;opacity:1;pointer-events:auto;background:#0C0C0C;font-family:'Barlow',sans-serif;-webkit-font-smoothing:antialiased}
+.slide{position:relative;width:1920px;height:auto;overflow:hidden;display:block;visibility:visible;opacity:1;pointer-events:auto;background:#0C0C0C;font-family:'Barlow',sans-serif;-webkit-font-smoothing:antialiased}
+.slide+.slide::before{content:'';display:block;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(245,130,31,.35) 25%,rgba(245,130,31,.35) 75%,transparent)}
 .slide.active{z-index:1}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.2s!important}}
 :root{--orange:#F5821F;--orange-d:#C4611A;--black:#0C0C0C;--surf:#141414;--surf2:#1C1C1C;--border:#2A2A2A;--white:#FFFFFF;--grey:#888;--greyl:#AAAAAA;--green:#50e3c2}
@@ -30,8 +31,7 @@ html,body{width:100%;height:auto;overflow-x:hidden;overflow-y:auto;background:#0
 .anim.in,.anim-l.in,.anim-r.in,.anim-s.in{opacity:1;transform:none}
 .chrome{position:absolute;bottom:44px;left:80px;right:80px;display:flex;justify-content:space-between;align-items:center;z-index:10}
 .slide-num{font-family:'Space Mono',monospace;font-size:16px;color:var(--border);letter-spacing:3px}
-.lmark{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;font-size:28px}
-.lmark .j{color:#CACACA}.lmark .f{color:var(--orange)}
+.lmark{display:none}.lmark-img{display:none}
 .nav-arrow{position:fixed;top:50%;transform:translateY(-50%);background:rgba(20,20,20,.85);border:1px solid var(--border);color:var(--greyl);font-size:24px;width:56px;height:56px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:9999;backdrop-filter:blur(8px)}
 .nav-arrow:hover{border-color:var(--orange);color:var(--orange)}
 .nav-prev{left:24px}.nav-next{right:24px}
@@ -450,7 +450,7 @@ html,body{width:100%;height:auto;overflow-x:hidden;overflow-y:auto;background:#0
 
 <!-- S1 HERO -->
 <div class="slide" id="s1">
-  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:0;text-align:center;padding:80px 120px;">
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;text-align:center;padding:140px 120px;">
 
     <!-- Ansattfordel badge -->
     <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(245,130,31,.12);border:1px solid var(--orange);border-radius:100px;padding:10px 28px;margin-bottom:32px;opacity:0;transform:translateY(-12px);transition:opacity .6s ease,transform .6s ease;" id="s1fordel">
@@ -726,7 +726,7 @@ html,body{width:100%;height:auto;overflow-x:hidden;overflow-y:auto;background:#0
 
 <!-- S5 PRICES -->
 <div class="slide" id="s5">
-  <div style="display:flex;flex-direction:column;padding:56px 76px 60px;gap:26px;height:100%;">
+  <div style="display:flex;flex-direction:column;padding:90px 76px 90px;gap:26px;">
     <div class="s3top">
       <div><span class="label anim" data-d="0">05 — Ditt tilbud</span><div class="h2 anim" data-d="100">VELG DIN <span class="o">PAKKE.</span></div></div>
       <div class="anim" data-d="200" style="text-align:right;"><span class="label" style="font-size:13px;letter-spacing:3px;">40% RABATT PÅ ALLE PAKKER</span></div>
@@ -773,7 +773,7 @@ html,body{width:100%;height:auto;overflow-x:hidden;overflow-y:auto;background:#0
 
 <!-- S6 KOM I GANG -->
 <div class="slide" id="s6">
-  <div style="display:flex;flex-direction:column;padding:66px 86px 72px;gap:34px;height:100%;">
+  <div style="display:flex;flex-direction:column;padding:90px 86px 90px;gap:34px;">
     <div><span class="label anim" data-d="0">06 — Kom i gang</span><div class="h2 anim" data-d="100">KOM I GANG PÅ <span class="o">3 STEG.</span></div></div>
     <div class="s6steps">
       <div class="obc" id="ob1"><div class="obn-row"><div class="obn">01</div><span class="steg-lbl">STEG 1</span></div><div class="ob-icon"><svg class="ic"><use href="#ic-clip"/></svg></div><div class="ob-title">Meld deg på</div><div class="ob-body">Velg pakke og registrer deg via intern lenke. Tar 5 minutter.</div><div class="ob-notes"><div class="ob-note">→ 4, 6 eller 8 økter per måned</div><div class="ob-note">→ Faktureres direkte</div></div></div>
