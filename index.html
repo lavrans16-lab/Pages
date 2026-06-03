@@ -240,7 +240,7 @@ body{width:100%;height:100%;overflow-x:hidden;overflow-y:scroll;scroll-snap-type
 .pcard.feat::after{color:#000!important;font-weight:800}
 /* ── S2 PORTAL ── */
 #s2{display:grid;grid-template-columns:680px 1fr;padding:0}
-.s2l{padding:80px 60px 80px 100px;display:flex;flex-direction:column;justify-content:center;gap:26px;border-right:1px solid var(--border)}
+.s2l{padding:80px 60px 80px 100px;display:flex;flex-direction:column;justify-content:center;gap:26px}
 .s2r{padding:80px 80px 80px 60px;display:flex;flex-direction:column;justify-content:center;gap:16px}
 .portal-lbl{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--orange);text-transform:uppercase;margin-bottom:6px}
 .portal-mock{background:var(--surf2);border:1px solid var(--border);border-radius:16px;overflow:hidden;flex:1}
@@ -290,7 +290,7 @@ body{width:100%;height:100%;overflow-x:hidden;overflow-y:scroll;scroll-snap-type
 
 /* ── S4 COACH ── */
 #s3{display:grid;grid-template-columns:640px 1fr;padding:0}
-.s4l{background:linear-gradient(135deg,#0E0C08,#141414);border-right:1px solid var(--border);padding:56px 60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0}
+.s4l{background:linear-gradient(135deg,#0E0C08,#141414);padding:56px 60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0}
 .s4r{padding:76px 80px 76px 60px;display:flex;flex-direction:column;justify-content:center;gap:22px}
 .c-search-lbl{font-family:'Space Mono',monospace;font-size:13px;letter-spacing:3px;color:var(--orange);text-transform:uppercase;margin-bottom:20px;min-height:18px;text-align:center}
 /* Narrow portrait frame crops the empty right-side city so subjects (~30% in source) center */
@@ -333,8 +333,9 @@ body{width:100%;height:100%;overflow-x:hidden;overflow-y:scroll;scroll-snap-type
 .sl2-txt strong{color:var(--white)}
 
 /* ── S5 RESULTS ── */
-#s4{display:grid;grid-template-columns:1fr 560px;padding:0;background:radial-gradient(ellipse 50% 80% at 100% 50%,rgba(245,130,31,.06) 0%,transparent 60%),#0C0C0C}
-.s5l{padding:80px 60px 80px 100px;display:flex;flex-direction:column;justify-content:center;gap:32px;border-right:1px solid var(--border)}
+#s4{display:block;padding:0;background:#0C0C0C}
+.s5r{display:none}
+.s5l{padding:80px 60px 80px 100px;display:flex;flex-direction:column;justify-content:center;gap:32px}
 .s5r{padding:70px 64px;display:flex;flex-direction:column;justify-content:center;gap:18px;background:linear-gradient(180deg,rgba(20,20,20,.4),rgba(28,28,28,.2));border-left:1px solid var(--border)}
 .big-stat{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;font-size:152px;line-height:1;color:var(--orange);letter-spacing:-4px}
 .big-stat .suf{font-size:76px;color:var(--greyl)}
@@ -772,7 +773,7 @@ body{width:100%;height:100%;overflow-x:hidden;overflow-y:scroll;scroll-snap-type
 
 <!-- S6 KOM I GANG -->
 <div class="slide" id="s6">
-  <div style="display:flex;flex-direction:column;padding:66px 86px 72px;gap:34px;height:100%;">
+  <div style="display:flex;flex-direction:column;padding:48px 86px 48px;gap:24px;height:100%;">
     <div><span class="label anim" data-d="0">06 — Kom i gang</span><div class="h2 anim" data-d="100">KOM I GANG PÅ <span class="o">3 STEG.</span></div></div>
     <div class="s6steps">
       <div class="obc" id="ob1"><div class="obn-row"><div class="obn">01</div><span class="steg-lbl">STEG 1</span></div><div class="ob-icon"><svg class="ic"><use href="#ic-clip"/></svg></div><div class="ob-title">Meld deg på</div><div class="ob-body">Velg pakke og registrer deg via intern lenke. Tar 5 minutter.</div><div class="ob-notes"><div class="ob-note">→ 4, 6 eller 8 økter per måned</div><div class="ob-note">→ Faktureres direkte</div></div></div>
