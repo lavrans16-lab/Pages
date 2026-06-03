@@ -272,13 +272,12 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0C0C0C}
 .s4l{background:linear-gradient(135deg,#0E0C08,#141414);border-right:1px solid var(--border);padding:56px 60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0}
 .s4r{padding:76px 80px 76px 60px;display:flex;flex-direction:column;justify-content:center;gap:22px}
 .c-search-lbl{font-family:'Space Mono',monospace;font-size:13px;letter-spacing:3px;color:var(--orange);text-transform:uppercase;margin-bottom:20px;min-height:18px;text-align:center}
-.c-img-wrap{width:340px;height:425px;border-radius:20px;overflow:hidden;border:2px solid var(--border);position:relative;background:var(--surf2)}
-.c-img{width:100%;height:100%;object-fit:cover;object-position:center top}
-/* Slow cinematic Ken Burns — zoomed + nudged right so left-standing subjects center better */
-@keyframes coachKB{0%{transform:scale(1.16) translate(5%,1%)}50%{transform:scale(1.2) translate(3%,-2%)}100%{transform:scale(1.16) translate(5%,1%)}}
-.c-img-wrap.glow-active .c-img{animation:coachKB 20s ease-in-out infinite}
-/* Static framing before/after animation — keep subject centered */
-.c-img{transform:scale(1.16) translate(5%,1%)}
+/* Narrow portrait frame crops the empty right-side city so subjects (~30% in source) center */
+.c-img-wrap{width:250px;height:470px;border-radius:20px;overflow:hidden;border:2px solid var(--border);position:relative;background:var(--surf2)}
+.c-img{width:100%;height:100%;object-fit:cover;object-position:2% center}
+/* Slow cinematic Ken Burns — gentle zoom anchored on the subject (origin left-of-center) */
+@keyframes coachKB{0%{transform:scale(1.04)}50%{transform:scale(1.11) translateY(-1.6%)}100%{transform:scale(1.04)}}
+.c-img-wrap.glow-active .c-img{transform-origin:28% 35%;animation:coachKB 20s ease-in-out infinite}
 /* Slow cinematic light sheen drifting across the portrait */
 .c-img-wrap.glow-active::after{
   content:'';position:absolute;inset:0;pointer-events:none;z-index:2;
