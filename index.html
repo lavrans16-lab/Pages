@@ -243,7 +243,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0C0C0C}
 .pcard:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.5)}
 .pcard.feat:hover{box-shadow:0 24px 60px rgba(245,130,31,.15)}
 .pc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
-.pc-sess{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:24px;text-transform:uppercase}
+.pc-sess{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:24px;text-transform:uppercase;color:var(--white)}
 .pc-badge{background:var(--orange);color:#000;font-family:'Space Mono',monospace;font-size:9px;font-weight:700;letter-spacing:1px;padding:5px 11px;border-radius:4px;text-transform:uppercase;flex-shrink:0;transform:scale(.8);opacity:0;transition:all .45s cubic-bezier(.34,1.56,.64,1)}
 .pc-badge.show{transform:scale(1);opacity:1}
 .pc-orig{font-family:'Space Mono',monospace;font-size:12px;color:var(--grey);text-decoration:line-through;margin-bottom:4px}
@@ -281,11 +281,14 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0C0C0C}
 .c-avail{background:rgba(80,227,194,.07);border:1px solid rgba(80,227,194,.2);border-radius:6px;padding:9px 18px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-top:4px}
 .search-btn{margin-top:18px;background:transparent;border:1px solid var(--border);color:var(--greyl);font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;padding:9px 22px;border-radius:6px;cursor:pointer;text-transform:uppercase;transition:all .2s}
 .search-btn:hover{border-color:var(--orange);color:var(--orange)}
-.sl2{display:flex;align-items:flex-start;gap:16px;padding:12px 0;border-bottom:1px solid var(--border);opacity:0;transform:translateX(-16px);transition:opacity .4s ease,transform .4s ease}
+.sl2{display:flex;align-items:flex-start;gap:16px;padding:14px 16px;margin:0 -16px;border-bottom:1px solid var(--border);border-radius:10px;opacity:0;transform:translateX(-16px);transition:opacity .4s ease,transform .4s ease,background .25s ease,padding-left .25s ease;cursor:default}
 .sl2:last-child{border-bottom:none}
 .sl2.in{opacity:1;transform:translateX(0)}
-.sl2-arr{color:var(--orange);font-size:20px;font-weight:700;flex-shrink:0;margin-top:3px}
-.sl2-txt{font-size:21px;color:var(--greyl);line-height:1.45}
+.sl2:hover{background:rgba(245,130,31,.07);border-bottom-color:transparent;padding-left:26px}
+.sl2:hover .sl2-arr{transform:translateX(4px)}
+.sl2:hover .sl2-txt{color:var(--white)}
+.sl2-arr{color:var(--orange);font-size:20px;font-weight:700;flex-shrink:0;margin-top:3px;transition:transform .25s ease}
+.sl2-txt{font-size:21px;color:var(--greyl);line-height:1.45;transition:color .25s ease}
 .sl2-txt strong{color:var(--white)}
 
 /* ── S5 RESULTS ── */
@@ -313,10 +316,16 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0C0C0C}
 
 /* ── S6 KOM I GANG ── */
 #s6{background:radial-gradient(ellipse 80% 60% at 50% 100%,rgba(245,130,31,.1) 0%,transparent 65%),#0C0C0C;display:flex;flex-direction:column;padding:68px 88px 76px;gap:36px}
-.s6steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;flex:1}
-.obc{background:var(--surf);border:1px solid var(--border);border-radius:16px;padding:38px 34px;display:flex;flex-direction:column;gap:14px;opacity:0;transform:translateY(22px);transition:all .5s ease}
+.s6steps{display:flex;align-items:stretch;gap:0;flex:1}
+.obc{flex:1;background:var(--surf);border:1px solid var(--border);border-radius:16px;padding:34px 30px;display:flex;flex-direction:column;gap:13px;opacity:0;transform:translateY(22px);transition:all .5s ease}
 .obc.in{opacity:1;transform:translateY(0)}
 .obc:last-child{border-color:var(--orange-d);background:linear-gradient(145deg,#170F08,#141414)}
+/* Connector between step cards */
+.step-conn{width:64px;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative}
+.step-conn::before{content:'';position:absolute;left:8px;right:8px;height:2px;background:repeating-linear-gradient(90deg,var(--orange-d) 0 6px,transparent 6px 12px);opacity:.5}
+.step-conn-arrow{position:relative;z-index:1;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:34px;color:var(--orange);background:var(--black);padding:0 6px;animation:connArrow 1.6s ease-in-out infinite}
+@keyframes connArrow{0%,100%{transform:translateX(0);opacity:.7}50%{transform:translateX(6px);opacity:1}}
+.steg-lbl{font-family:'Space Mono',monospace;font-size:13px;letter-spacing:3px;color:var(--grey);text-transform:uppercase}
 .obn-row{display:flex;align-items:center;gap:14px}
 .obn{width:50px;height:50px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:20px;color:var(--grey);flex-shrink:0}
 .obn.a{border-color:var(--orange);color:var(--orange);background:rgba(245,130,31,.1);box-shadow:0 0 20px rgba(245,130,31,.3)}
@@ -391,9 +400,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0C0C0C}
         </div>
 
         <!-- × -->
-        <div style="position:relative;display:flex;align-items:center;justify-content:center;width:64px;height:64px;">
-          <div id="s1ring" style="position:absolute;inset:-8px;border:1.5px solid var(--orange);border-radius:50%;opacity:0;transform:scale(.5);"></div>
-          <span class="s1x" id="s1x" style="font-size:48px;position:relative;z-index:1;">×</span>
+        <div style="display:flex;align-items:center;justify-content:center;width:48px;">
+          <span class="s1x" id="s1x" style="font-size:44px;">×</span>
         </div>
 
         <!-- JobFit real logo -->
@@ -578,8 +586,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0C0C0C}
       <div class="c-dot"></div>
     </div>
     <div class="c-info" id="cinfo">
-      <div class="c-name" id="cname">LAVRANS</div>
-      <div class="c-role" id="crole">PERFORMANCE COACH</div>
       <div class="c-specs" id="cspecs"><span class="spec-pill">Styrke</span><span class="spec-pill">Kondisjon</span><span class="spec-pill">Mental helse</span></div>
       <div class="c-avail">● TILGJENGELIG FOR BOOKING</div>
     </div>
@@ -679,9 +685,11 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0C0C0C}
   <div style="display:flex;flex-direction:column;padding:66px 86px 72px;gap:34px;height:100%;">
     <div><span class="label anim" data-d="0">06 — Kom i gang</span><div class="h2 anim" data-d="100">KOM I GANG PÅ <span class="o">3 STEG.</span></div></div>
     <div class="s6steps">
-      <div class="obc" id="ob1"><div class="obn-row"><div class="obn">01</div><div class="obhr"></div></div><div class="ob-icon">📋</div><div class="ob-title">Meld deg på</div><div class="ob-body">Velg pakke og registrer deg via intern lenke. Tar 5 minutter.</div><div class="ob-notes"><div class="ob-note">→ 4, 6 eller 8 økter per måned</div><div class="ob-note">→ Faktureres direkte</div></div></div>
-      <div class="obc" id="ob2"><div class="obn-row"><div class="obn">02</div><div class="obhr"></div></div><div class="ob-icon">🤝</div><div class="ob-title">Match med coach</div><div class="ob-body">JobFit matcher deg med riktig coach. Du hører fra oss innen 24 timer.</div><div class="ob-notes"><div class="ob-note">→ Kontakt innen 24 timer</div><div class="ob-note">→ Samme coach hele perioden</div></div></div>
-      <div class="obc" id="ob3"><div class="obn-row"><div class="obn a">03</div><div class="obhr a"></div></div><div class="ob-icon">🏋️</div><div class="ob-title">Start første økt</div><div class="ob-body">Book tid, møt opp i treningsfasilitetene og kom i gang. Da setter dere mål sammen.</div><div class="ob-notes"><div class="ob-note">→ I egne treningsfasiliteter</div><div class="ob-note">→ Mål settes sammen med coach</div></div></div>
+      <div class="obc" id="ob1"><div class="obn-row"><div class="obn">01</div><span class="steg-lbl">STEG 1</span></div><div class="ob-icon">📋</div><div class="ob-title">Meld deg på</div><div class="ob-body">Velg pakke og registrer deg via intern lenke. Tar 5 minutter.</div><div class="ob-notes"><div class="ob-note">→ 4, 6 eller 8 økter per måned</div><div class="ob-note">→ Faktureres direkte</div></div></div>
+      <div class="step-conn" id="conn1"><span class="step-conn-arrow">→</span></div>
+      <div class="obc" id="ob2"><div class="obn-row"><div class="obn">02</div><span class="steg-lbl">STEG 2</span></div><div class="ob-icon">🤝</div><div class="ob-title">Match med coach</div><div class="ob-body">JobFit matcher deg med riktig coach. Du hører fra oss innen 24 timer.</div><div class="ob-notes"><div class="ob-note">→ Kontakt innen 24 timer</div><div class="ob-note">→ Samme coach hele perioden</div></div></div>
+      <div class="step-conn" id="conn2"><span class="step-conn-arrow">→</span></div>
+      <div class="obc" id="ob3"><div class="obn-row"><div class="obn a">03</div><span class="steg-lbl" style="color:var(--orange)">STEG 3</span></div><div class="ob-icon">🏋️</div><div class="ob-title">Start første økt</div><div class="ob-body">Book tid, møt opp i treningsfasilitetene og kom i gang. Da setter dere mål sammen.</div><div class="ob-notes"><div class="ob-note">→ I egne treningsfasiliteter</div><div class="ob-note">→ Mål settes sammen med coach</div></div></div>
     </div>
     <div class="cta-band anim" data-d="600"><div class="cta-left"><span class="cta-kicker">KLAR NÅR DU ER</span><div class="cta-title">TA FØRSTE STEG<br>MOT <span class="o">EN STERKERE DEG.</span></div></div><div class="cta-right"><button class="shim-btn">MELD MEG PÅ NÅ →</button><div class="cta-contact"><span>Spørsmål? Ta kontakt:</span><span class="em">lavrans.al@jobfit.no</span><span>jobfit.no</span></div></div></div>
   </div>
@@ -757,14 +765,12 @@ let tx=0;document.addEventListener('touchstart',e=>tx=e.touches[0].clientX);docu
 /* ── S1: PARTNERSHIP BADGE ANIM — badge enters as ONE synced unit ── */
 function aS1(){
   const badge=document.getElementById('s1badge');
-  const px=document.getElementById('s1x'), ring=document.getElementById('s1ring');
   const tag=document.getElementById('s1tag');
   const l1=document.getElementById('s1line1'), l2=document.getElementById('s1line2');
   const hl=document.getElementById('s1hl'), body=document.getElementById('s1body');
 
   // Reset
   Object.assign(badge.style,{opacity:'0',transform:'translateY(20px) scale(.96)'});
-  Object.assign(ring.style,{opacity:'0',transform:'scale(.5)',transition:'none',animation:'none'});
   Object.assign(tag.style,{opacity:'0',transform:'translateY(8px)'}); tag.textContent='';
   l1.style.width='0'; l2.style.width='0';
   Object.assign(hl.style,{opacity:'0',transform:'translateY(24px)',transition:'opacity .7s ease,transform .7s ease'});
@@ -775,18 +781,12 @@ function aS1(){
   setTimeout(()=>{ badge.style.opacity='1'; badge.style.transform='translateY(0) scale(1)'; }, 250);
   // 2. Lines draw out
   setTimeout(()=>{ l1.style.width='460px'; l2.style.width='460px'; }, 500);
-  // 3. × ring pops + starts pulsing
-  setTimeout(()=>{
-    Object.assign(ring.style,{transition:'opacity .4s ease,transform .6s cubic-bezier(.34,1.56,.64,1)'});
-    ring.style.opacity='1'; ring.style.transform='scale(1)';
-    setTimeout(()=>{ring.style.animation='xPulseRing 2.4s ease-out infinite';},600);
-  }, 700);
-  // 4. Tag
-  setTimeout(()=>{ tag.textContent='NYTT SAMARBEID · 2026'; tag.style.opacity='1'; tag.style.transform='translateY(0)'; }, 950);
-  // 5. Headline
-  setTimeout(()=>{ hl.style.opacity='1'; hl.style.transform='translateY(0)'; }, 1150);
-  // 6. Body + quote rotator
-  setTimeout(()=>{ body.style.opacity='1'; body.style.transform='translateY(0)'; startQuoteRotator(); }, 1450);
+  // 3. Tag
+  setTimeout(()=>{ tag.textContent='NYTT SAMARBEID · 2026'; tag.style.opacity='1'; tag.style.transform='translateY(0)'; }, 800);
+  // 4. Headline
+  setTimeout(()=>{ hl.style.opacity='1'; hl.style.transform='translateY(0)'; }, 1000);
+  // 5. Body + quote rotator
+  setTimeout(()=>{ body.style.opacity='1'; body.style.transform='translateY(0)'; startQuoteRotator(); }, 1300);
 }
 function aS2(){
   // Reset portal rows
@@ -845,12 +845,14 @@ function countPrice(el, from, to, dur){
     const t=Math.min((Date.now()-start)/dur,1);
     const ease=1-Math.pow(1-t,3);
     const val=Math.round(from-diff*ease);
-    el.innerHTML=val.toLocaleString('no')+'<span class="suf">,-</span>';
+    el.innerHTML=fmtKr(val)+'<span class="suf">,-</span>';
     if(t<1)requestAnimationFrame(tick);
     else el.style.color='var(--orange)';
   }
   requestAnimationFrame(tick);
 }
+/* Format number with period as thousands separator (brand style: 4.190) */
+function fmtKr(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'.');}
 
 function aS3(){
   // Reset all cards
@@ -859,7 +861,7 @@ function aS3(){
     const pel=document.getElementById(p);
     // Reset
     [b,p,fl,sv,dv,ft,nt].forEach(id=>document.getElementById(id)?.classList.remove('show'));
-    if(pel){pel.style.color='var(--greyl)'; pel.innerHTML=from.toLocaleString('no')+'<span class="suf" style="color:var(--greyl)">,-</span>';}
+    if(pel){pel.style.color='var(--greyl)'; pel.innerHTML=fmtKr(from)+'<span class="suf" style="color:var(--greyl)">,-</span>';}
     // Phase 1: show original price in grey
     setTimeout(()=>pel?.classList.add('show'), d);
     // Phase 2: badge drops in
@@ -939,8 +941,6 @@ function runSearch(){
       img.src=c.img; // ensure exact target
       setTimeout(()=>{
         lbl.textContent='DIN COACH ER FUNNET ✓';
-        document.getElementById('cname').textContent=c.name;
-        document.getElementById('crole').textContent=c.role;
         document.getElementById('cspecs').innerHTML=c.specs.map(s=>'<span class="spec-pill">'+s+'</span>').join('');
         Object.assign(info.style,{transform:'scale(.95)',opacity:'0'});
         if(wrap) wrap.classList.add('glow-active');  // activate border glow on found coach
@@ -997,7 +997,17 @@ function aS5(){
 
   if(src) setTimeout(()=>src.style.opacity='1', 2200);
 }
-function aS6(){['ob1','ob2','ob3'].forEach((id,i)=>{const el=document.getElementById(id);el.style.opacity='0';el.style.transform='translateY(22px)';setTimeout(()=>{el.style.transition='all .5s ease';el.style.opacity='1';el.style.transform='translateY(0)';},200+i*250);});}
+function aS6(){
+  ['conn1','conn2'].forEach(id=>{const c=document.getElementById(id);if(c){c.style.opacity='0';c.style.transition='opacity .4s ease';}});
+  ['ob1','ob2','ob3'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    el.style.opacity='0';el.style.transform='translateY(22px)';
+    setTimeout(()=>{el.style.transition='all .5s ease';el.style.opacity='1';el.style.transform='translateY(0)';},200+i*250);
+  });
+  // Reveal connectors between cards
+  setTimeout(()=>{const c=document.getElementById('conn1');if(c)c.style.opacity='1';},520);
+  setTimeout(()=>{const c=document.getElementById('conn2');if(c)c.style.opacity='1';},770);
+}
 
 showSlide(1);
 
