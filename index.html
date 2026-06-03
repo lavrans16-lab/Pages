@@ -55,6 +55,26 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0C0C0C}
 @keyframes xPulseGlow{0%,100%{color:var(--border);text-shadow:none}50%{color:var(--orange);text-shadow:0 0 30px rgba(245,130,31,.7),0 0 60px rgba(245,130,31,.3)}}
 @keyframes xPulseRing{0%{transform:scale(1);opacity:.7;box-shadow:0 0 0 0 rgba(245,130,31,.5)}100%{transform:scale(1.6);opacity:0;box-shadow:0 0 0 20px rgba(245,130,31,0)}}
 @keyframes tagFadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+/* Portal row hover */
+.prow{cursor:pointer}
+.prow:hover{background:rgba(245,130,31,.12)!important;border-color:rgba(245,130,31,.5)!important;transform:translateX(4px);transition:all .2s ease!important}
+.prow:hover .prow-text{color:var(--white)!important}
+/* Price card selection */
+.pcard.selected{border-color:var(--orange)!important;box-shadow:0 0 40px rgba(245,130,31,.2)!important;transform:translateY(-8px)!important}
+.pcard.selected::before{height:4px!important}
+.pcard.dimmed{opacity:.45;transform:none!important}
+.select-badge{position:absolute;bottom:0;left:0;right:0;background:var(--orange);color:#000;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:2px;text-align:center;padding:10px;text-transform:uppercase;transform:translateY(100%);transition:transform .4s cubic-bezier(.34,1.56,.64,1);border-radius:0 0 20px 20px}
+.pcard.selected .select-badge{transform:translateY(0)}
+/* Price counter */
+.pc-price-display{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;font-size:96px;line-height:1;letter-spacing:-1px;transition:color .4s ease}
+.pc-price-display .suf{font-size:44px}
+/* Trend tile interactive */
+.trend{cursor:pointer}
+.trend:hover{border-color:rgba(245,130,31,.3)!important;transform:scale(1.02);transition:all .2s ease!important}
+.trend.stress-t:hover{border-color:rgba(80,227,194,.3)!important}
+.trend.up-health:hover{border-color:rgba(80,227,194,.3)!important}
+.trend-detail{font-size:14px;color:var(--grey);max-height:0;overflow:hidden;transition:max-height .4s ease,margin-top .3s ease;margin-top:0;font-family:'Space Mono',monospace;letter-spacing:.5px}
+.trend.expanded .trend-detail{max-height:60px;margin-top:8px}
 /* Typewriter cursor */
 @keyframes twBlink{0%,100%{opacity:1}50%{opacity:0}}
 .tw-cur{display:inline-block;width:5px;height:.82em;background:var(--orange);vertical-align:middle;margin-left:4px;animation:twBlink .85s step-end infinite}
@@ -212,16 +232,38 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0C0C0C}
       <div id="s1line1" style="height:1px;background:linear-gradient(90deg,transparent,var(--orange),transparent);width:0;transition:width .9s .2s ease;"></div>
 
       <!-- Partners row -->
-      <div style="display:flex;align-items:center;gap:40px;">
-        <span class="s1p fl" id="s1pl" style="font-size:56px;">FREMTIND</span>
+      <div style="display:flex;align-items:center;gap:52px;">
 
-        <!-- × with pulse ring -->
-        <div style="position:relative;display:flex;align-items:center;justify-content:center;width:72px;height:72px;">
-          <div id="s1ring" style="position:absolute;inset:-12px;border:1.5px solid var(--orange);border-radius:50%;opacity:0;transform:scale(.4);transition:none;"></div>
-          <span class="s1x" id="s1x" style="font-size:52px;position:relative;z-index:1;">×</span>
+        <!-- Fremtind circular logo -->
+        <div class="s1p fl" id="s1pl" style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+          <svg width="110" height="110" viewBox="0 0 200 200" style="filter:drop-shadow(0 0 12px rgba(245,130,31,.15))">
+            <defs>
+              <path id="cp" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/>
+            </defs>
+            <circle cx="100" cy="100" r="94" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            <text fill="white" font-size="15.5" font-family="'Barlow Condensed',sans-serif" font-weight="700" letter-spacing="5.5">
+              <textPath href="#cp">LEVERT AV · FREMTIND FORSIKRING · </textPath>
+            </text>
+            <!-- F chevron mark -->
+            <path d="M58,138 L100,62 L142,138" fill="none" stroke="white" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--greyl);text-transform:uppercase;">FREMTIND</span>
         </div>
 
-        <span class="s1p fr" id="s1pr" style="font-size:56px;"><span style="color:#CACACA;">JOB</span><span style="color:var(--orange);">FIT</span></span>
+        <!-- × -->
+        <div style="position:relative;display:flex;align-items:center;justify-content:center;width:64px;height:64px;">
+          <div id="s1ring" style="position:absolute;inset:-8px;border:1.5px solid var(--orange);border-radius:50%;opacity:0;transform:scale(.5);"></div>
+          <span class="s1x" id="s1x" style="font-size:48px;position:relative;z-index:1;">×</span>
+        </div>
+
+        <!-- JobFit logo text -->
+        <div class="s1p fr" id="s1pr" style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;font-size:72px;line-height:1;letter-spacing:-1px;">
+            <span style="color:#CACACA;">JOB</span><span style="color:var(--orange);">FIT</span>
+          </div>
+          <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--greyl);text-transform:uppercase;">JOBFIT AS</span>
+        </div>
+
       </div>
 
       <!-- Tag line -->
@@ -378,13 +420,50 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0C0C0C}
       </div>
     </div>
   </div>
-  <div class="s5r">
-    <span class="label anim" data-d="100" style="margin-bottom:4px">ETTER 4–8 UKER MED JOBFIT</span>
-    <div class="trend stress-t" id="tt1"><div class="trend-icon">😮‍💨</div><div class="trend-body"><div class="trend-name">STRESS SYNKER ↓</div><div class="trend-track"><div class="trend-fill stress" id="tf1"></div></div></div><div class="trend-arr">↓</div></div>
-    <div class="trend up-orange" id="tt2"><div class="trend-icon">⚡</div><div class="trend-body"><div class="trend-name">ENERGI STIGER ↑</div><div class="trend-track"><div class="trend-fill up-o" id="tf2"></div></div></div><div class="trend-arr">↑</div></div>
-    <div class="trend up-orange" id="tt3"><div class="trend-icon">📈</div><div class="trend-body"><div class="trend-name">PRESTASJON ØKER ↑</div><div class="trend-track"><div class="trend-fill up-o" id="tf3"></div></div></div><div class="trend-arr">↑</div></div>
-    <div class="trend up-health" id="tt4"><div class="trend-icon">❤️</div><div class="trend-body"><div class="trend-name">HELSE BEDRES ↑</div><div class="trend-track"><div class="trend-fill up-g" id="tf4"></div></div></div><div class="trend-arr">↑</div></div>
-    <div class="src-note">MÅLBART ETTER 4–8 UKER · DOKUMENTERT MED PSS-10 OG WPAI</div>
+  <div class="s5r" style="padding:60px 56px;gap:14px;justify-content:center;">
+    <span class="label" style="margin-bottom:6px;opacity:0;transition:opacity .5s ease;" id="s5rlbl">TRYKK PÅ EN EFFEKT FOR Å LÆR MER</span>
+
+    <div class="trend stress-t" id="tt1" onclick="expandTrend(this)">
+      <div class="trend-icon">😮‍💨</div>
+      <div class="trend-body">
+        <div class="trend-name">STRESS SYNKER ↓</div>
+        <div class="trend-track"><div class="trend-fill stress" id="tf1"></div></div>
+        <div class="trend-detail">Måles med PSS-10. Deltakere rapporterer markant lavere opplevd stress allerede etter 4 uker med regelmessig coach-oppfølging.</div>
+      </div>
+      <div class="trend-arr">↓</div>
+    </div>
+
+    <div class="trend up-orange" id="tt2" onclick="expandTrend(this)">
+      <div class="trend-icon">⚡</div>
+      <div class="trend-body">
+        <div class="trend-name">ENERGI STIGER ↑</div>
+        <div class="trend-track"><div class="trend-fill up-o" id="tf2"></div></div>
+        <div class="trend-detail">Selvrapportert energiindeks viser økning etter 6–8 uker. Mer energi på jobb og i hverdagen er blant de første effektene deltakerne merker.</div>
+      </div>
+      <div class="trend-arr">↑</div>
+    </div>
+
+    <div class="trend up-orange" id="tt3" onclick="expandTrend(this)">
+      <div class="trend-icon">📈</div>
+      <div class="trend-body">
+        <div class="trend-name">PRESTASJON ØKER ↑</div>
+        <div class="trend-track"><div class="trend-fill up-o" id="tf3"></div></div>
+        <div class="trend-detail">WPAI-målinger viser redusert tap av arbeidskapasitet. Bedre fokus og konsentrasjon er direkte koblet til økt fysisk kapasitet.</div>
+      </div>
+      <div class="trend-arr">↑</div>
+    </div>
+
+    <div class="trend up-health" id="tt4" onclick="expandTrend(this)">
+      <div class="trend-icon">❤️</div>
+      <div class="trend-body">
+        <div class="trend-name">HELSE BEDRES ↑</div>
+        <div class="trend-track"><div class="trend-fill up-g" id="tf4"></div></div>
+        <div class="trend-detail">Kombinasjonen av fast coach, struktur og progresjonsmåling gir langvarige helsegevinster — både fysisk og mentalt.</div>
+      </div>
+      <div class="trend-arr">↑</div>
+    </div>
+
+    <div class="src-note" style="opacity:0;transition:opacity .5s ease 2s;" id="s5src">DOKUMENTERT · PSS-10 · WPAI · SELVRAPPORTERT ENERGIINDEKS</div>
   </div>
   <div class="chrome"><div class="slide-num">05 / 06</div><div class="lmark"><span class="j">JOB</span><span class="f">FIT</span></div><span></span></div>
 </div>
@@ -476,30 +555,27 @@ function aS1(){
   const l1=document.getElementById('s1line1'), l2=document.getElementById('s1line2');
   const hl=document.getElementById('s1hl'), body=document.getElementById('s1body');
 
-  // Reset
-  [pl,pr].forEach(el=>{el.classList.remove('in');el.style.opacity='0';});
-  px.classList.remove('in'); px.style.opacity='0';
-  ring.style.opacity='0'; ring.style.transform='scale(.4)';
-  tag.style.opacity='0'; tag.style.transform='translateY(8px)'; tag.textContent='';
+  // Reset — use only classList, NOT inline opacity (inline overrides class!)
+  [pl,pr].forEach(el=>{ el.classList.remove('in'); el.style.removeProperty('opacity'); el.style.removeProperty('transform'); });
+  px.classList.remove('in'); px.style.removeProperty('opacity');
+  Object.assign(ring.style,{opacity:'0',transform:'scale(.5)',transition:'none',animation:'none'});
+  Object.assign(tag.style,{opacity:'0',transform:'translateY(8px)'}); tag.textContent='';
   l1.style.width='0'; l2.style.width='0';
-  hl.style.opacity='0'; hl.style.transform='translateY(24px)';
-  body.style.opacity='0'; body.style.transform='translateY(16px)';
+  Object.assign(hl.style,{opacity:'0',transform:'translateY(24px)',transition:'opacity .7s ease,transform .7s ease'});
+  Object.assign(body.style,{opacity:'0',transform:'translateY(16px)',transition:'opacity .6s ease,transform .6s ease'});
 
   // Sequence
-  setTimeout(()=>{l1.style.width='420px'; l2.style.width='420px';}, 200);
-  setTimeout(()=>{pl.classList.add('in'); pr.classList.add('in');}, 600);
-  setTimeout(()=>{px.classList.add('in');}, 1000);
+  setTimeout(()=>{ l1.style.width='460px'; l2.style.width='460px'; }, 150);
+  setTimeout(()=>{ pl.classList.add('in'); pr.classList.add('in'); }, 550);
+  setTimeout(()=>{ px.classList.add('in'); }, 950);
   setTimeout(()=>{
-    ring.style.transition='opacity .4s ease, transform .6s cubic-bezier(.34,1.56,.64,1)';
+    Object.assign(ring.style,{transition:'opacity .4s ease,transform .6s cubic-bezier(.34,1.56,.64,1)'});
     ring.style.opacity='1'; ring.style.transform='scale(1)';
-    setTimeout(()=>{ ring.style.animation='xPulseRing 2.4s ease-out infinite'; }, 600);
-  }, 1100);
-  setTimeout(()=>{
-    tag.textContent='NYTT SAMARBEID · 2026';
-    tag.style.opacity='1'; tag.style.transform='translateY(0)';
-  }, 1300);
-  setTimeout(()=>{hl.style.opacity='1'; hl.style.transform='translateY(0)';}, 1500);
-  setTimeout(()=>{body.style.opacity='1'; body.style.transform='translateY(0)';}, 1800);
+    setTimeout(()=>{ring.style.animation='xPulseRing 2.4s ease-out infinite';},600);
+  }, 1050);
+  setTimeout(()=>{ tag.textContent='NYTT SAMARBEID · 2026'; tag.style.opacity='1'; tag.style.transform='translateY(0)'; }, 1250);
+  setTimeout(()=>{ hl.style.opacity='1'; hl.style.transform='translateY(0)'; }, 1450);
+  setTimeout(()=>{ body.style.opacity='1'; body.style.transform='translateY(0)'; }, 1750);
 }
 function aS2(){
   // Reset portal rows
@@ -546,36 +622,145 @@ function aS2(){
   }
   setTimeout(tick, 200);
 }
+/* Price countdown helper */
+const PRICE_DATA = [
+  {b:'b1',p:'p1',fl:'fl1',sv:'sv1',dv:'dv1',ft:'ft1',nt:'nt1', from:6990, to:4190, delay:200},
+  {b:'b2',p:'p2',fl:'fl2',sv:'sv2',dv:'dv2',ft:'ft2',nt:'nt2', from:8990, to:5390, delay:350},
+  {b:'b3',p:'p3',fl:'fl3',sv:'sv3',dv:'dv3',ft:'ft3',nt:'nt3', from:11990, to:7190, delay:500},
+];
+function countPrice(el, from, to, dur){
+  const start=Date.now(); const diff=from-to;
+  function tick(){
+    const t=Math.min((Date.now()-start)/dur,1);
+    const ease=1-Math.pow(1-t,3);
+    const val=Math.round(from-diff*ease);
+    el.innerHTML=val.toLocaleString('no')+'<span class="suf">,-</span>';
+    if(t<1)requestAnimationFrame(tick);
+    else el.style.color='var(--orange)';
+  }
+  requestAnimationFrame(tick);
+}
+
 function aS3(){
-  [['b1','p1','fl1','sv1','dv1','ft1','nt1',350],['b2','p2','fl2','sv2','dv2','ft2','nt2',500],['b3','p3','fl3','sv3','dv3','ft3','nt3',650]].forEach(([b,p,fl,sv,dv,ft,nt,d])=>{
-    setTimeout(()=>document.getElementById(b)?.classList.add('show'),d);
-    setTimeout(()=>document.getElementById(p)?.classList.add('show'),d+280);
-    setTimeout(()=>document.getElementById(fl)?.classList.add('show'),d+440);
-    setTimeout(()=>document.getElementById(sv)?.classList.add('show'),d+600);
-    setTimeout(()=>document.getElementById(dv)?.classList.add('show'),d+760);
-    setTimeout(()=>document.getElementById(ft)?.classList.add('show'),d+880);
-    setTimeout(()=>document.getElementById(nt)?.classList.add('show'),d+1020);
+  // Reset all cards
+  document.querySelectorAll('.pcard').forEach(c=>c.classList.remove('selected','dimmed'));
+  PRICE_DATA.forEach(({b,p,fl,sv,dv,ft,nt,from,to,delay:d})=>{
+    const pel=document.getElementById(p);
+    // Reset
+    [b,p,fl,sv,dv,ft,nt].forEach(id=>document.getElementById(id)?.classList.remove('show'));
+    if(pel){pel.style.color='var(--greyl)'; pel.innerHTML=from.toLocaleString('no')+'<span class="suf" style="color:var(--greyl)">,-</span>';}
+    // Phase 1: show original price in grey
+    setTimeout(()=>pel?.classList.add('show'), d);
+    // Phase 2: badge drops in
+    setTimeout(()=>document.getElementById(b)?.classList.add('show'), d+500);
+    // Phase 3: count down to discounted price
+    setTimeout(()=>{ if(pel) countPrice(pel,from,to,700); }, d+900);
+    // Phase 4: label + savings + features
+    setTimeout(()=>document.getElementById(fl)?.classList.add('show'), d+1050);
+    setTimeout(()=>document.getElementById(sv)?.classList.add('show'), d+1150);
+    setTimeout(()=>document.getElementById(dv)?.classList.add('show'), d+1300);
+    setTimeout(()=>document.getElementById(ft)?.classList.add('show'), d+1420);
+    setTimeout(()=>document.getElementById(nt)?.classList.add('show'), d+1550);
   });
 }
+
+/* Card click selection */
+function selectCard(card){
+  document.querySelectorAll('.pcard').forEach(c=>{
+    c.classList.remove('selected');
+    c.classList.toggle('dimmed', c!==card);
+  });
+  card.classList.remove('dimmed');
+  card.classList.add('selected');
+}
+// Attach on load
+window.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('.pcard').forEach(card=>{
+    card.style.cursor='pointer';
+    card.addEventListener('click',()=>selectCard(card));
+  });
+});
 function runSearch(){
   const img=document.getElementById('cimg'),info=document.getElementById('cinfo'),lbl=document.getElementById('slbl');
-  info.style.opacity='0';lbl.textContent='FINNER DIN COACH...';
+  info.style.opacity='0'; lbl.textContent='FINNER DIN COACH...';
   document.getElementById('s4list').querySelectorAll('.sl2').forEach(el=>el.classList.remove('in'));
-  const speeds=[80,80,90,100,110,140,170,210,270,350,460];
-  let step=0,idx=0;
-  function flash(){idx=(idx+1)%COACHES.length;img.style.opacity='.5';img.src=COACHES[idx].img;setTimeout(()=>img.style.opacity='1',35);
-    if(step<speeds.length-1){step++;setTimeout(flash,speeds[step]);}
-    else{const c=COACHES[idx];setTimeout(()=>{lbl.textContent='DIN COACH ER FUNNET ✓';document.getElementById('cname').textContent=c.name;document.getElementById('crole').textContent=c.role;document.getElementById('cspecs').innerHTML=c.specs.map(s=>'<span class="spec-pill">'+s+'</span>').join('');info.style.transform='scale(.95)';setTimeout(()=>{info.style.transition='opacity .5s ease,transform .5s cubic-bezier(.34,1.56,.64,1)';info.style.opacity='1';info.style.transform='scale(1)';document.getElementById('s4list').querySelectorAll('.sl2').forEach((el,i)=>setTimeout(()=>el.classList.add('in'),i*130));},200);},300);}
+
+  // Pick a RANDOM target coach (fix: was always landing on same index)
+  const targetIdx = Math.floor(Math.random()*COACHES.length);
+  // Build variable-length speed array that ends at targetIdx
+  const speeds=[75,75,80,90,100,115,140,170,210,270,350,460];
+  // Calculate starting idx so we land on targetIdx after speeds.length flashes
+  const startIdx = ((targetIdx - speeds.length) % COACHES.length + COACHES.length) % COACHES.length;
+  let step=0, idx=startIdx;
+
+  function flash(){
+    idx=(idx+1)%COACHES.length;
+    img.style.opacity='.5';
+    img.src=COACHES[idx].img;
+    setTimeout(()=>img.style.opacity='1',35);
+    if(step<speeds.length-1){ step++; setTimeout(flash,speeds[step]); }
+    else {
+      // Settle on chosen coach
+      const c=COACHES[targetIdx];
+      img.src=c.img; // ensure exact target
+      setTimeout(()=>{
+        lbl.textContent='DIN COACH ER FUNNET ✓';
+        document.getElementById('cname').textContent=c.name;
+        document.getElementById('crole').textContent=c.role;
+        document.getElementById('cspecs').innerHTML=c.specs.map(s=>'<span class="spec-pill">'+s+'</span>').join('');
+        Object.assign(info.style,{transform:'scale(.95)',opacity:'0'});
+        setTimeout(()=>{
+          Object.assign(info.style,{transition:'opacity .5s ease,transform .5s cubic-bezier(.34,1.56,.64,1)',opacity:'1',transform:'scale(1)'});
+          document.getElementById('s4list').querySelectorAll('.sl2').forEach((el,i)=>setTimeout(()=>el.classList.add('in'),i*130));
+        },200);
+      },300);
+    }
   }
   setTimeout(flash,80);
 }
 function aS4(){document.getElementById('s4list').querySelectorAll('.sl2').forEach(el=>el.classList.remove('in'));runSearch();}
+function expandTrend(el){
+  const isOpen=el.classList.contains('expanded');
+  document.querySelectorAll('.trend').forEach(t=>t.classList.remove('expanded'));
+  if(!isOpen) el.classList.add('expanded');
+}
+
 function aS5(){
-  const el=document.getElementById('s5c');el.textContent='0';
-  setTimeout(()=>{let v=0;const int=setInterval(()=>{v=Math.min(v+1,40);el.textContent=v;if(v>=40)clearInterval(int);},40);},400);
-  ['tt1','tt2','tt3','tt4'].forEach((id,i)=>{const t=document.getElementById(id);if(t){t.classList.remove('in');setTimeout(()=>t.classList.add('in'),300+i*180);}});
-  const tf1=document.getElementById('tf1');if(tf1){tf1.style.transition='none';tf1.style.width='100%';setTimeout(()=>{tf1.style.transition='width 1.4s cubic-bezier(.23,1,.32,1)';tf1.style.width='22%';},700);}
-  [['tf2',83,900],['tf3',78,1080],['tf4',71,1260]].forEach(([id,w,d])=>{const el=document.getElementById(id);if(el){el.style.width='0';setTimeout(()=>{el.style.transition='width 1.3s cubic-bezier(.23,1,.32,1)';el.style.width=w+'%';},d);}});
+  // Left side counter
+  const el=document.getElementById('s5c');
+  if(el){el.textContent='0';setTimeout(()=>{let v=0;const i=setInterval(()=>{v=Math.min(v+1,40);el.textContent=v;if(v>=40)clearInterval(i);},40);},500);}
+
+  // Reset trend tiles
+  ['tt1','tt2','tt3','tt4'].forEach(id=>{const t=document.getElementById(id);if(t){t.classList.remove('in','expanded');}});
+
+  // Reset bars explicitly before animating
+  const tf1=document.getElementById('tf1');
+  if(tf1){tf1.style.transition='none';tf1.style.width='100%';}
+  [['tf2',0],['tf3',0],['tf4',0]].forEach(([id,w])=>{const b=document.getElementById(id);if(b){b.style.transition='none';b.style.width=w+'%';}});
+
+  // Show label + tiles with delay (after slide transition)
+  const lbl=document.getElementById('s5rlbl'), src=document.getElementById('s5src');
+  if(lbl){lbl.style.opacity='0'; setTimeout(()=>lbl.style.opacity='1', 800);}
+
+  ['tt1','tt2','tt3','tt4'].forEach((id,i)=>{
+    setTimeout(()=>{
+      const t=document.getElementById(id);
+      if(t) t.classList.add('in');
+    }, 600+i*200);
+  });
+
+  // Animate bars — delayed to allow tile reveal
+  setTimeout(()=>{
+    if(tf1){tf1.style.transition='width 1.4s cubic-bezier(.23,1,.32,1)';tf1.style.width='22%';}
+  }, 800);
+  [['tf2',82,1000],['tf3',76,1200],['tf4',69,1400]].forEach(([id,w,d])=>{
+    setTimeout(()=>{
+      const b=document.getElementById(id);
+      if(b){b.style.transition='width 1.3s cubic-bezier(.23,1,.32,1)';b.style.width=w+'%';}
+    },d);
+  });
+
+  if(src) setTimeout(()=>src.style.opacity='1', 2200);
 }
 function aS6(){['ob1','ob2','ob3'].forEach((id,i)=>{const el=document.getElementById(id);el.style.opacity='0';el.style.transform='translateY(22px)';setTimeout(()=>{el.style.transition='all .5s ease';el.style.opacity='1';el.style.transform='translateY(0)';},200+i*250);});}
 
